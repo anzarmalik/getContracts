@@ -5,7 +5,7 @@ const app = express();
 app.use(bodyParser.json());
 app.set('sequelize', sequelize)
 app.set('models', sequelize.models)
-import router from '../routes';
+const router = require('../routes');
 
 /*api calls will be routed from here*/
 app.use('/deel/', router);

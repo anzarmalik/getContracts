@@ -1,11 +1,11 @@
 /*
 all apis will be visible here 
 */
-import express from 'express';
-import { getContractById } from '../controllers';
-
+const express = require('express');
+const { getContractById } = require('../controllers');
+const { getProfile } = require('../middleware/getProfile');
 const router = express.Router();
 
 router.get('/contracts/:id', getProfile, getContractById);
 
-export default router;
+module.exports = router;
