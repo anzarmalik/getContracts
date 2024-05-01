@@ -8,6 +8,6 @@ app.set('models', sequelize.models)
 const router = require('../routes');
 
 /*api calls will be routed from here*/
-app.use('/deel/', router);
+app.use('/', router);
 
 module.exports = app;
