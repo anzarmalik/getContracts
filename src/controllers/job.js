@@ -18,9 +18,9 @@ const payForJob = async (req, res) => {
     try {
         const response = await Job.payForJob(req);
         if (!response.amountPaid) {
-            res.status(404).json(response);
+           return res.status(404).json(response).end();
         }
-        res.status(200).json(response);
+        return res.status(200).json(response).end();
     } catch (error) {
         res
             .status(500)

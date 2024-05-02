@@ -56,7 +56,7 @@ const payForJob = async (req) => {
     const amountToBePaid = job.price;
     const sequelize = req.app.get('sequelize');
     if (balance < amountToBePaid) {
-        return response = { amountPaid: false, message: `Client doesnot have required balance` }
+        return { amountPaid: false, message: `Client doesnot have required balance` }
     }
     const transaction = await sequelize.transaction();
     try {
@@ -69,7 +69,7 @@ const payForJob = async (req) => {
         return { amountPaid: true, message: `Payment of ${amountToBePaid} for ${job.description} has been made successfully.` };
     } catch (error) {
         await transaction.rollback();
-        response = { amountPaid: false, message: `Payment of ${amountToBePaid} for ${job.description} failed. Please try again.` };
+        return { amountPaid: false, message: `Payment of ${amountToBePaid} for ${job.description} failed. Please try again.` };
     }
 }
 
