@@ -96,7 +96,50 @@ const getBestProfession = async (req) => {
   return bestProfessions[0];
 };
 
+const getBestClients = async (req) => {
+  const { sequelize } = require('../model');
+  const { Contract, Profile, Job } = req.app.get('models');
+  const { start, end, limit } = req.query;
+
+  const paidJobsForPeriod = await Job.findAll({
+    attributes: [[sequelize.fn('SUM', sequelize.col('price')), 'totalPaid'],],
+    order: [[sequelize.fn('SUM', sequelize.col('price')), 'DESC']],
+    where: {
+      paid: true,
+      paymentDate: {
+        [Op.between]: [start, end]
+      }
+    },
+    include: [
+      {
+        model: Contract,
+        include: [
+          {
+            model: Profile,
+            as: 'Client',
+            where: { type: 'client' },
+            attributes: ['firstName', 'lastName']
+          }
+        ],
+        attributes: ['ClientId']
+      }
+    ],
+    group: 'Contract.ClientId',
+    limit: parseInt(limit || 2),
+    // subQuery: false,
+  });
+
+  return paidJobsForPeriod.map(function (job) {
+    return {
+      id: job.Contract.ClientId,
+      fullName: `${job.Contract.Client.firstName} ${job.Contract.Client.lastName}`,
+      paid: job.dataValues.totalPaid
+    };
+  });
+}
+
 module.exports = {
   deposit,
-  getBestProfession
+  getBestProfession,
+  getBestClients
 };

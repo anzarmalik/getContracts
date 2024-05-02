@@ -31,7 +31,23 @@ const getBestProfession = async (req, res) => {
     }
 };
 
+
+const getBestClients = async (req, res) => {
+    try {
+        const bestClients = await Client.getBestClients(req);
+        if (!bestClients) {
+            return res.status(404).json({ message: 'best clients not found . Try again later' });
+        }
+        return res.status(200).json(bestClients);
+    } catch (error) {
+        return res
+            .status(500)
+            .json({ message: 'Error occurred while finding best clients', error });
+    }
+};
+
 module.exports = {
     deposit,
-    getBestProfession
+    getBestProfession,
+    getBestClients
 };

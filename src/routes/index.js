@@ -4,7 +4,7 @@ all apis will be visible here
 const express = require('express');
 const { getContractById, getAllNonTerminatedContracts } = require('../controllers/contract');
 const { getUnpaidJobs, payForJob } = require('../controllers/job');
-const { deposit, getBestProfession } = require('../controllers/client');
+const { deposit, getBestProfession, getBestClients } = require('../controllers/client');
 const { getProfile } = require('../middleware/getProfile');
 const router = express.Router();
 
@@ -14,5 +14,6 @@ router.get('/jobs/unpaid', getProfile, getUnpaidJobs);
 router.post('/jobs/:job_id/pay', getProfile, payForJob);
 router.post('/balances/deposit/:userId', deposit);
 router.get('/admin/best-profession', getBestProfession);
+router.get("/admin/best-clients", getBestClients);
 
 module.exports = router;
