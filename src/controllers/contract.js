@@ -1,4 +1,4 @@
-const Contracts = require('../helpers/contracts');
+const Contracts = require('../helpers/contract');
 
 const getContractById = async (req, res) => {
     try {
