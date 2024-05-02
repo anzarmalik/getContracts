@@ -5,6 +5,10 @@ const sequelize = new Sequelize({
   storage: './database.sqlite3'
 });
 
+// sequelize.sync({
+//   force: true
+// })
+
 class Profile extends Sequelize.Model {}
 Profile.init(
   {
