@@ -1,0 +1,7 @@
+node_modules
+scripts
+model.js
+middleware
+# below files should not be written here 
+helpers
+controllers

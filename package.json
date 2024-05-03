@@ -5,14 +5,20 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "dotenv": "^16.4.5",
+    "eslint": "^8.40.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "express": "4.17.1",
+    "prettier": "^2.8.8",
     "redis": "^4.6.13",
     "sequelize": "^6.23.0",
     "sqlite3": "^5.0.0"
   },
   "scripts": {
     "start": "nodemon ./src/server.js",
-    "seed": "node ./scripts/seedDb.js"
+    "seed": "node ./scripts/seedDb.js",
+    "lint": "eslint --ignore-path .eslintignore --ext .js .",
+    "lint:fix": "eslint src --ext .js --fix"
   },
   "devDependencies": {
     "concurrently": "^8.0.1",
