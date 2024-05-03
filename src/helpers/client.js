@@ -1,7 +1,11 @@
 const { Op } = require('sequelize');
-
+const RedisManager = require('./redis');
 const deposit = async (req) => {
   const clientId = req.params.userId;
+  const lockResponse = await RedisManager.lockRequestOrThrowError(clientId);
+  if (!lockResponse) {
+    return { amountDeposited: false, message: `Request Lock Already In Process, Try again later` };
+  }
   const depositAmount = req.body.amount || 0;
   const { Job, Contract, Profile } = req.app.get('models');
   const sequelize = req.app.get('sequelize');
@@ -47,6 +51,7 @@ const deposit = async (req) => {
     await client.increment({ balance: depositAmount }, { transaction });
     client.balance += depositAmount;
     await transaction.commit();
+    await RedisManager.unlockRequest(clientId);
     return { amountDeposited: true, message: `Amount deposited Successfully, Amount deposited is ${depositAmount} & Total balance of Client is now ${client.balance}` };
   } catch (error) {
     await transaction.rollback();
