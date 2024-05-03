@@ -1,57 +1,46 @@
-# DEEL BACKEND TASK
+<h1 align="center">Simple & Basic Get Contracts APP </h1>
+This is a very basic example of getting Contracts from Clients and getting some Job in Node.js and express framework . I have applied REST based API recommendations and my custom architecture .
 
-💫 Welcome! 🎉
+I have also used eslint | prettier modules for finding and fixing problems/linting issues in my code .
 
-This backend exercise involves building a Node.js/Express.js app that will serve a REST API. We imagine you should spend around 3 hours at implement this feature.
+As per business needs i have written basic cache lock mechanism for one API using redis cache.
 
-## Data Models
+I will write basic test cases(will update Readme) using testing framework Jest https://jestjs.io/ .
 
-> **All models are defined in src/model.js**
 
-### Profile
+### Built With :
 
-A profile can be either a `client` or a `contractor`.
-clients create contracts with contractors. contractor does jobs for clients and get paid.
-Each profile has a balance property.
+nodeJs , expressJs , redis-cache, Postman, jest, eslint etc
 
-### Contract
 
-A contract between and client and a contractor.
-Contracts have 3 statuses, `new`, `in_progress`, `terminated`. contracts are considered active only when in status `in_progress`
-Contracts group jobs within them.
+Getting Started :
 
-### Job
+i have use node version v16.15.0  & npm verion 8.5.5 .
 
-contractor get paid for jobs by clients under a certain contract.
+### Prerequisites:
 
-## Getting Set Up
+npm
 
-The exercise requires [Node.js](https://nodejs.org/en/) to be installed. We recommend using the LTS version.
+Clone the repo  and checkout to anzar-solution branch & take git pull .
 
-1. Start by creating a local repository for this folder.
+Install NPM packages
 
-1. In the repo root directory, run `npm install` to gather all dependencies.
+npm install ( npm i )
 
-1. Next, `npm run seed` will seed the local SQLite database. **Warning: This will drop the database if it exists**. The database lives in a local file `database.sqlite3`.
+type nodemon in terminal
 
-1. Then run `npm start` which should start both the server and the React client.
+open your postman(preferred) 
 
-❗️ **Make sure you commit all changes to the master branch!**
+And type: localhost:8000
 
-## Technical Notes
+My Postman API collection public link below : 
+https://www.postman.com/gladiator-dev/workspace/anzar-dev/collection/5511458-04cfd33b-d038-4b42-85a7-9b4226dece26?action=share&creator=5511458
 
-- The server is running with [nodemon](https://nodemon.io/) which will automatically restart for you when you modify and save a file.
 
-- The database provider is SQLite, which will store data in a file local to your repository called `database.sqlite3`. The ORM [Sequelize](http://docs.sequelizejs.com/) is on top of it. You should only have to interact with Sequelize - **please spend some time reading sequelize documentation before starting the exercise.**
-
-- To authenticate users use the `getProfile` middleware that is located under src/middleware/getProfile.js. users are authenticated by passing `profile_id` in the request header. after a user is authenticated his profile will be available under `req.profile`. make sure only users that are on the contract can access their contracts.
-- The server is running on port 3001.
-
-## APIs To Implement
-
+### API's :
 Below is a list of the required API's for the application.
 
-1. **_GET_** `/contracts/:id` - This API is broken 😵! it should return the contract only if it belongs to the profile calling. better fix that!
+1. **_GET_** `/contracts/:id` - it should return the contract only if it belongs to the profile calling. better fix that!
 
 1. **_GET_** `/contracts` - Returns a list of contracts belonging to a user (client or contractor), the list should only contain non terminated contracts.
 
@@ -65,34 +54,8 @@ Below is a list of the required API's for the application.
 
 1. **_GET_** `/admin/best-clients?start=<date>&end=<date>&limit=<integer>` - returns the clients the paid the most for jobs in the query time period. limit query parameter should be applied, default limit is 2.
 
-```
- [
-    {
-        "id": 1,
-        "fullName": "Reece Moyer",
-        "paid" : 100.3
-    },
-    {
-        "id": 200,
-        "fullName": "Debora Martin",
-        "paid" : 99
-    },
-    {
-        "id": 22,
-        "fullName": "Debora Martin",
-        "paid" : 21
-    }
-]
-```
 
-## Going Above and Beyond the Requirements
 
-Given the time expectations of this exercise, we don't expect anyone to submit anything super fancy, but if you find yourself with extra time, any extra credit item(s) that showcase your unique strengths would be awesome! 🙌
+if you want to change environment variables <here i have pushed my .env file too>
 
-It would be great for example if you'd write some unit test / simple frontend demostrating calls to your fresh APIs.
-
-## Submitting the Assignment
-
-When you have finished the assignment, zip your repo (make sure to include .git folder) and send us the zip.
-
-Thank you and good luck! 🙏
+Contact Anzar Malik - anzarmalikcse@gmail.com
